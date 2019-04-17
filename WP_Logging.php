@@ -44,21 +44,21 @@ class WP_Logging {
 	public function prune_logs(){
 
 		//$should_we_prune = apply_filters( 'wp_logging_should_we_prune', true );
-        $should_we_prune = get_option( 'wp_logging_should_we_prune', false );
+		$should_we_prune = get_option( 'wp_logging_should_we_prune', false );
 
 		if ( $should_we_prune === false ){
 			return;
 		}
-        $done = false;
+		$done = false;
 		while( ! $done ) {
-            $logs_to_prune = $this->get_logs_to_prune();
+			$logs_to_prune = $this->get_logs_to_prune();
 
-            if (isset($logs_to_prune) && !empty($logs_to_prune)) {
-                $this->prune_old_logs($logs_to_prune);
-            } else {
-                $done = true;
-            }
-        }
+			if (isset($logs_to_prune) && !empty($logs_to_prune)) {
+				$this->prune_old_logs($logs_to_prune);
+			} else {
+				$done = true;
+			}
+		}
 
 	} // prune_logs
 
@@ -77,7 +77,7 @@ class WP_Logging {
 	private function prune_old_logs( $logs ){
 
 		//$force = apply_filters( 'wp_logging_force_delete_log', false );
-        $force = get_option( 'wp_logging_force_delete_log', true);
+		$force = get_option( 'wp_logging_force_delete_log', true);
 
 		foreach( $logs as $l ){
 			$id = is_int( $l ) ? $l : $l->ID;
