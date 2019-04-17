@@ -79,7 +79,7 @@ class WP_Logging {
 		//$force = apply_filters( 'wp_logging_force_delete_log', false );
 		$force = get_option( 'wp_logging_force_delete_log', true);
 
-		foreach( $logs as $l ){
+		foreach (  $logs as $l ){
 			$id = is_int( $l ) ? $l : $l->ID;
 			wp_delete_post( $id, $force );
 		}
@@ -285,7 +285,7 @@ class WP_Logging {
 
 		// set log meta, if any
 		if( $log_id && ! empty( $log_meta ) ) {
-			foreach( (array) $log_meta as $key => $meta ) {
+			foreach (  (array) $log_meta as $key => $meta ) {
 				update_post_meta( $log_id, '_wp_log_' . sanitize_key( $key ), $meta );
 			}
 		}
@@ -325,7 +325,7 @@ class WP_Logging {
 		$log_id = wp_update_post( $args );
 
 		if( $log_id && ! empty( $log_meta ) ) {
-			foreach( (array) $log_meta as $key => $meta ) {
+			foreach (  (array) $log_meta as $key => $meta ) {
 				if( ! empty( $meta ) )
 					update_post_meta( $log_id, '_wp_log_' . sanitize_key( $key ), $meta );
 			}
