@@ -48,12 +48,16 @@ class WP_Logging {
 		if ( $should_we_prune === false ){
 			return;
 		}
+        $done = false;
+		while( ! $done ) {
+            $logs_to_prune = $this->get_logs_to_prune();
 
-		$logs_to_prune = $this->get_logs_to_prune();
-
-		if ( isset( $logs_to_prune ) && ! empty( $logs_to_prune ) ){
-			$this->prune_old_logs( $logs_to_prune );
-		}
+            if (isset($logs_to_prune) && !empty($logs_to_prune)) {
+                $this->prune_old_logs($logs_to_prune);
+            } else {
+                $done = true;
+            }
+        }
 
 	} // prune_logs
 
@@ -100,7 +104,7 @@ class WP_Logging {
 
 		$args = array(
 			'post_type'      => 'wp_log',
-			'posts_per_page' => '100',
+			'posts_per_page' => '5',
 			'date_query'     => array(
 				array(
 					'column' => 'post_date_gmt',
