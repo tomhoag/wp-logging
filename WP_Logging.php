@@ -43,7 +43,8 @@ class WP_Logging {
 	 */
 	public function prune_logs(){
 
-		$should_we_prune = apply_filters( 'wp_logging_should_we_prune', false );
+		//$should_we_prune = apply_filters( 'wp_logging_should_we_prune', true );
+        $should_we_prune = get_option( 'wp_logging_should_we_prune', false );
 
 		if ( $should_we_prune === false ){
 			return;
@@ -75,7 +76,8 @@ class WP_Logging {
 	 */
 	private function prune_old_logs( $logs ){
 
-		$force = apply_filters( 'wp_logging_force_delete_log', true );
+		//$force = apply_filters( 'wp_logging_force_delete_log', false );
+        $force = get_option( 'wp_logging_force_delete_log', true);
 
 		foreach( $logs as $l ){
 			$id = is_int( $l ) ? $l : $l->ID;
@@ -100,7 +102,8 @@ class WP_Logging {
 	 */
 	private function get_logs_to_prune(){
 
-		$how_old = apply_filters( 'wp_logging_prune_when', '2 weeks ago' );
+		//$how_old = apply_filters( 'wp_logging_prune_when', '2 weeks ago' );
+		$how_old = get_option( 'wp_logging_prune_when', '2 weeks ago' );
 
 		$args = array(
 			'post_type'      => 'wp_log',
